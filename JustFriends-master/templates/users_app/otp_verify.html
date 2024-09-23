@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baumans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+        type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'users_app/login.css' %}">
+    <title>OTP Verification - JustFriends</title>
+</head>
+
+<body>
+
+    <div class="content_">
+        <div class="text">
+            OTP Verification - JustFriends
+        </div>
+
+        <form class="ui form margin-top" autocomplete="off" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <label>Enter OTP</label>
+                <input type="text" name="otp" placeholder="OTP">
+            </div>
+            <button class="ui animated fade grey button" type="submit">
+                <span class="visible content">Submit</span>
+                <span class="hidden content"><i class="sign-in icon"></i></span>
+            </button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'sucess' %}
+                    <div class="ui green message medium">{{ message }}</div>
+                {% endif %}
+
+                {% if message.tags == 'info' %}
+                    <div class="ui red message tiny">{{ message }}</div>
+                {% endif %}
+
+                {% if message.tags == 'warning' %}
+                    <div class="ui violet message tiny">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="{% static 'users_app/main.js' %}"></script>
+</body>
+
+</html>
